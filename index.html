@@ -36,13 +36,13 @@
       .cursor {
         display: block; width: 10px; height: 10px;
         background: var(--accent); border-radius: 50%;
-        position: fixed; pointer-events: none; z-index: 9999;
+        position: fixed; pointer-events: none; z-index: 999;
         mix-blend-mode: difference;
       }
       .cursor-ring {
         display: block; width: 36px; height: 36px;
         border: 1px solid var(--accent); border-radius: 50%;
-        position: fixed; pointer-events: none; z-index: 9998; opacity: 0.5;
+        position: fixed; pointer-events: none; z-index: 998; opacity: 0.5;
       }
       body::before {
         content: '';
@@ -72,7 +72,7 @@
 
     /* NAV */
     nav {
-      position: fixed; top: 38px; left: 0; right: 0; z-index: 90;
+      position: fixed; top: 38px; left: 0; right: 0; z-index: 1000;
       display: flex; justify-content: space-between; align-items: center;
       padding: 20px 48px;
       background: linear-gradient(to bottom, rgba(10,10,10,0.96) 70%, transparent);
@@ -80,11 +80,14 @@
     .nav-logo {
       font-family: 'Bebas Neue', sans-serif; font-size: 22px;
       letter-spacing: 0.15em; color: var(--accent); text-decoration: none;
+      position: relative; z-index: 1001; cursor: pointer;
     }
     .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links li { position: relative; z-index: 1001; }
     .nav-links a {
       color: var(--muted); text-decoration: none; font-size: 11px;
       letter-spacing: 0.2em; text-transform: uppercase; transition: color 0.3s;
+      cursor: pointer; display: block;
     }
     .nav-links a:hover { color: var(--accent); }
 
@@ -190,7 +193,7 @@
     }
     .about-heading span { color: var(--accent); display: block; }
     .about-text {
-      font-family: 'Cormorant Garamond', serif; font-size: 19px;
+      font-family: 'Cormorant Garamond', serif; font-size: 22px;
       line-height: 1.8; color: #c8c4bb; font-weight: 300; margin-bottom: 28px;
     }
     .about-text strong { color: var(--accent); font-weight: 600; }
@@ -219,8 +222,8 @@
       line-height: 1; margin-bottom: 14px; transition: color 0.35s;
     }
     .skill-item:hover .skill-num { color: var(--accent); }
-    .skill-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; margin-bottom: 10px; }
-    .skill-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+    .skill-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; margin-bottom: 10px; }
+    .skill-desc { font-size: 15px; color: var(--muted); line-height: 1.7; }
 
     /* PROJECTS */
     #projects { background: var(--bg2); }
@@ -236,7 +239,7 @@
       padding: 4px 10px; display: inline-block; margin-bottom: 14px;
     }
     .project-name { font-family: 'Bebas Neue', sans-serif; font-size: 34px; letter-spacing: 0.05em; margin-bottom: 10px; }
-    .project-desc { font-size: 13px; color: var(--muted); line-height: 1.7; max-width: 520px; }
+    .project-desc { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 520px; }
     .project-arrow {
       font-family: 'Bebas Neue', sans-serif; font-size: 22px;
       letter-spacing: 0.1em; color: var(--accent); transition: transform 0.3s;
@@ -293,6 +296,59 @@
     .reveal { opacity: 1; transform: none; transition: opacity 0.6s ease, transform 0.6s ease; }
     .reveal.hidden { opacity: 0; transform: translate3d(0,18px,0); will-change: opacity,transform; }
     .reveal.visible { opacity: 1; transform: translate3d(0,0,0); }
+
+    /* HOBBIES */
+    #hobbies { background: var(--bg); }
+    .hobbies-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+    .hobby-card {
+      border: 1px solid var(--border);
+      padding: 48px 40px;
+      margin: -1px 0 0 -1px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.4s;
+    }
+    .hobby-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(200,169,110,0.06) 0%, transparent 60%);
+      opacity: 0; transition: opacity 0.4s;
+    }
+    .hobby-card:hover::before { opacity: 1; }
+    .hobby-icon {
+      font-size: 40px;
+      margin-bottom: 20px;
+      display: block;
+      line-height: 1;
+    }
+    .hobby-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .hobby-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 767px) {
+      .hobbies-grid { grid-template-columns: 1fr; }
+      .hobby-card { padding: 28px 20px; margin: 0; border-left: none; border-right: none; border-top: none; }
+      .hobby-card:first-child { border-top: 1px solid var(--border); }
+      .hobby-icon { font-size: 32px; margin-bottom: 14px; }
+      .hobby-title { font-size: 24px; }
+    }
+    @media (min-width: 768px) and (max-width: 1024px) {
+      .hobbies-grid { grid-template-columns: repeat(2, 1fr); }
+      .hobby-card { padding: 36px 28px; }
+    }
 
     /* ══════════════════════════════
        МОБИЛЬ  ≤ 767px
@@ -383,6 +439,7 @@
     <li><a href="#about">О себе</a></li>
     <li><a href="#skills">Компетенции</a></li>
     <li><a href="#projects">Проекты</a></li>
+    <li><a href="#hobbies">Увлечения</a></li>
     <li><a href="#education">Образование</a></li>
     <li><a href="#contact">Контакты</a></li>
   </ul>
@@ -436,22 +493,22 @@
 
 <!-- SKILLS -->
 <section id="skills">
-  <p class="section-label reveal">Компетенции</p>
+  <p class="section-label reveal">Основные компетенции</p>
   <div class="skills-list">
     <div class="skill-item reveal">
       <div class="skill-num">01</div>
-      <h3 class="skill-title">Операционное управление</h3>
-      <p class="skill-desc">Контроль задач и дедлайнов, выстраивание рабочих процессов с нуля, управление командой и ресурсами.</p>
+      <h3 class="skill-title">Разработка MVP-решений</h3>
+      <p class="skill-desc">Большой опыт в разработке MVP — от идеи до рабочего продукта. Быстро нахожу минимальный путь к результату и запускаю проверку гипотез без лишних затрат.</p>
     </div>
     <div class="skill-item reveal" style="transition-delay:0.1s;">
       <div class="skill-num">02</div>
-      <h3 class="skill-title">Консалтинг & E-commerce</h3>
-      <p class="skill-desc">Опыт в консалтинге, торговле, IT-проектах и нишевых услугах. Понимание специфики различных рынков.</p>
+      <h3 class="skill-title">Управление командой</h3>
+      <p class="skill-desc">Умею управлять командой и находить нестандартные решения для трабшутинга бизнес-запроса. Создаю условия, в которых люди работают эффективно.</p>
     </div>
     <div class="skill-item reveal" style="transition-delay:0.18s;">
       <div class="skill-num">03</div>
-      <h3 class="skill-title">Документация & Процессы</h3>
-      <p class="skill-desc">Ведение деловой документации, регламентов, отчётности. Структурирование информации и потоков данных.</p>
+      <h3 class="skill-title">Операционное управление</h3>
+      <p class="skill-desc">Контроль задач и дедлайнов, выстраивание рабочих процессов с нуля. Ведение документации, регламентов и отчётности.</p>
     </div>
     <div class="skill-item reveal" style="transition-delay:0.26s;">
       <div class="skill-num">04</div>
@@ -509,6 +566,30 @@
       <p class="edu-spec">Строительство и эксплуатация зданий и сооружений</p>
       <p class="edu-city">Екатеринбург · 1 курс</p>
       <p class="edu-note">Параллельно с учёбой — активная предпринимательская деятельность и развитие собственного IT-продукта.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOBBIES -->
+<section id="hobbies">
+  <p class="section-label reveal">Увлечения</p>
+  <div class="hobbies-grid">
+    <div class="hobby-card reveal">
+      <span class="hobby-icon">♟</span>
+      <h3 class="hobby-title">Шахматы</h3>
+      <p class="hobby-desc">Интеллектуальная игра, которая научила думать на несколько ходов вперёд. Каждое решение в бизнесе — это комбинация, у которой есть последствия. Шахматы тренируют стратегическое мышление лучше любого курса.</p>
+    </div>
+    <div class="hobby-card reveal" style="transition-delay:0.1s;">
+      <span class="hobby-icon">🏂</span>
+      <h3 class="hobby-title">Сноуборд</h3>
+      <p class="hobby-desc">Горы и скорость — идеальный способ перезагрузить голову. Сноуборд учит не бояться падать и быстро вставать. Ровно то, что нужно предпринимателю.</p>
+    </div>
+    <div class="hobby-card reveal" style="transition-delay:0.2s;">
+      <span class="hobby-icon">🎾</span>
+      <h3 class="hobby-title">Падел</h3>
+      <p class="hobby-desc">Быстрый, динамичный командный спорт. Падел — это про реакцию, партнёрство и нестандартные решения в доли секунды. Отличная метафора для бизнеса.</p>
     </div>
   </div>
 </section>
